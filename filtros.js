@@ -9,6 +9,10 @@ function subtractPixel(data, coord1, coord2) {
     return (Math.abs(r) + Math.abs(g) + Math.abs(b))/3 
 }
 
+        // d[i] == red
+        // d[i+1] == green
+        // d[i+2] == blue
+
 function negative(ctx) {
     let width = ctx.canvas.width;
     let height = ctx.canvas.height;
@@ -32,6 +36,75 @@ function hell(ctx) {
         d[i+2] = 0;
     }
     ctx.putImageData(imgData, 0, 0);
+}
+
+function warm(ctx) {
+    let width = ctx.canvas.width;
+    let height = ctx.canvas.height;
+    let imgData = ctx.getImageData(0, 0, width, height);
+    let d = imgData.data;
+    for(i = 0; i < width * height * 4; i+=4) {
+        d[i] += 20;
+        d[i+1] += 20;
+    }
+    ctx.putImageData(imgData, 0, 0);
+}
+
+function cold(ctx) {
+    let width = ctx.canvas.width;
+    let height = ctx.canvas.height;
+    let imgData = ctx.getImageData(0, 0, width, height);
+    let d = imgData.data;
+    for(i = 0; i < width * height * 4; i+=4) {
+        d[i+1] += 10;
+        d[i+2] += 30;
+    }
+    ctx.putImageData(imgData, 0, 0);
+}
+
+function sepia(ctx) {
+    Caman(ctx.canvas, function () {
+        this.revert();
+        this.brightness(10);
+        this.contrast(30);
+        this.sepia(60);
+        this.saturation(30);
+        this.render();
+  });
+}
+
+function saturation(ctx) {
+    Caman(ctx.canvas, function() {
+        this.revert();
+        this.saturation(30);
+        this.sharpen(20);
+        this.render();
+    });
+}
+
+function shitpost(ctx) {
+    Caman(ctx.canvas, function() {
+        this.revert();
+        this.clip(60);
+        this.sharpen(30);
+        this.render();
+    });
+}
+
+function miopia(ctx) {
+    Caman(ctx.canvas, function() {
+        this.revert();
+        this.stackBlur(10);
+        this.render();
+    });
+}
+
+function melancolia(ctx) {
+    Caman(ctx.canvas, function() {
+        this.revert();
+        this.gamma(2);
+        this.render();
+    });
 }
 
 function borda(ctx) {

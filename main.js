@@ -6,7 +6,7 @@ let originalCtx = original.getContext('2d');
 let salvarEl = document.querySelector('#salvar');
 let conviteEl = document.querySelector('#convite');
 
-let filtros = [borda, negative, hell, nada];
+let filtros = [nada, hell, cold, borda, shitpost, miopia, melancolia, warm, negative, sepia, saturation];
 
 function loadImage(evt) {
     console.log(evt);
@@ -18,6 +18,7 @@ function loadImage(evt) {
         
         mainCanvas.width = img.width;
         mainCanvas.height = img.height;
+        // mainCtx.clearRect(0, 0, img.width, img.height);
         mainCtx.drawImage(img, 0, 0, mainCanvas.width, mainCanvas.height);
         if(img.width * window.innerHeight/window.innerWidth > img.height) {
             canvas.style = 'width: 80%';
@@ -79,5 +80,7 @@ function salvar() {
     a.download = 'made with infiltro';
     a.click();
 }
+
+
 
 salvarEl.addEventListener('click', salvar);
